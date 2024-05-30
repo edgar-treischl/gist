@@ -166,8 +166,8 @@ create_gist = function (name, code, description) {
   x <- gistfiles()
 
   if (name %in% x$file) {
-    return("TRUE")
     usethis::ui_done("Insert {name}")
+    return("TRUE")
   }
 
 
