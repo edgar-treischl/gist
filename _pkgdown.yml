@@ -1,10 +1,11 @@
 url: https://edgar-treischl.github.io/gist/
 template:
   bootstrap: 5
-  bootswatch: litera
+  bootswatch: simplex
   bslib:
-    base_font: {google: "Solway"}
-    heading_font: {google: "Solway"}
+    base_font: {google: "Lato"}
+    heading_font: {google: "Lato"}
+
 navbar:
   structure:
     right: github

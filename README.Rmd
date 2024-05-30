@@ -24,8 +24,8 @@ The goal of gist is to ...
 
 You can install the development version of gist like so:
 
-``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+```{r, eval=FALSE}
+devtools::install_github("edgar-treischl/gist")
 ```
 
 ## Example
