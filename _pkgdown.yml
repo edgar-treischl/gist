@@ -1,4 +1,17 @@
-url: ~
+url: https://edgar-treischl.github.io/CopyCat/
 template:
   bootstrap: 5
+  bootswatch: litera
+  bslib:
+    base_font: {google: "Solway"}
+    heading_font: {google: "Solway"}
+navbar:
+  structure:
+    right: github
+development:
+  mode: auto
+authors:
+  Edgar Treischl:
+    href: https://www.edgar-treischl.de/
+
 
