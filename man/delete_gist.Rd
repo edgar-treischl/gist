@@ -7,11 +7,11 @@
 delete_gist(id)
 }
 \arguments{
-\item{id}{The id of the Gist file (see copycat_gistfiles).}
+\item{id}{The id of the Gist file.}
 }
 \value{
-Message if successful.
+Message if file was successfully deleted.
 }
 \description{
-The function \code{copycat_gists.del()} deletes GitHub Gists.
+Be careful: The function \code{delete_gist()} deletes GitHub Gists file.
 }

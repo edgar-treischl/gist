@@ -7,15 +7,15 @@
 create_gist(name, code, description)
 }
 \arguments{
-\item{name}{The name of the Gist file.}
+\item{name}{The name of the file.}
 
 \item{code}{String with the code of the Gist.}
 
-\item{description}{Code description.}
+\item{description}{String with the code description.}
 }
 \value{
 Message if successful.
 }
 \description{
-The function \code{copycat_gists.create()} creates GitHub Gists.
+The function \code{create_gist()} creates a new GitHub Gist file.
 }

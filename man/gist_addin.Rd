@@ -7,8 +7,8 @@
 gist_addin()
 }
 \description{
-The \code{gist_addin()} creates a shiny gadget
-to manage your gists. Pick a gists, press the insert
-button and the code will be insert into the current document at the
-location of the cursor. Furthermore you can create and delete gists.
+The \code{gist_addin()} creates a shiny miniui app
+to manage your gists. Pick a gist, press the copy or the insert
+button and the code will be insert into the current document
+Furthermore you can create and delete gists as well.
 }

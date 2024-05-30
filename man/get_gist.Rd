@@ -7,9 +7,9 @@
 get_gist(filename, description = FALSE)
 }
 \arguments{
-\item{filename}{The file name from one of your GitHub account (see gistfiles)}
+\item{filename}{The file name from a gist of your GitHub account (see gistfiles)}
 
-\item{description}{The file name from one of your GitHub account (see gistfiles)}
+\item{description}{If TRUE, the function returns the description of the Gist.}
 }
 \value{
 Message if successful.

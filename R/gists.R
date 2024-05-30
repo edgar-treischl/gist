@@ -1,6 +1,6 @@
-#' Explore GitHub Gist files
+#' Explore all GitHub Gist files
 #'
-#' @description The function `copycat_gistfiles()` returns a list with GitHub Gists.
+#' @description The function `gistfiles()` returns all GitHub Gists.
 #' @return Data frame with file names.
 #' @export
 #'
@@ -53,8 +53,8 @@ gistfiles <- function() {
 #' Copy Github Gist files
 #'
 #' @description The function `get_gist()` copies GitHub Gists.
-#' @param filename The file name from one of your GitHub account (see gistfiles)
-#' @param description The file name from one of your GitHub account (see gistfiles)
+#' @param filename The file name from a gist of your GitHub account (see gistfiles)
+#' @param description If TRUE, the function returns the description of the Gist.
 #' @return Message if successful.
 #' @export
 #'
@@ -121,10 +121,10 @@ utils::globalVariables(c("n"))
 
 #' Create Github Gist files
 #'
-#' @description The function `copycat_gists.create()` creates GitHub Gists.
-#' @param name The name of the Gist file.
+#' @description The function `create_gist()` creates a new GitHub Gist file.
+#' @param name The name of the file.
 #' @param code String with the code of the Gist.
-#' @param description Code description.
+#' @param description String with the code description.
 #' @return Message if successful.
 #' @export
 #'
@@ -176,9 +176,9 @@ create_gist = function (name, code, description) {
 
 #' Delete Github Gist files
 #'
-#' @description The function `copycat_gists.del()` deletes GitHub Gists.
-#' @param id The id of the Gist file (see copycat_gistfiles).
-#' @return Message if successful.
+#' @description Be careful: The function `delete_gist()` deletes GitHub Gists file.
+#' @param id The id of the Gist file.
+#' @return Message if file was successfully deleted.
 #' @export
 #'
 
