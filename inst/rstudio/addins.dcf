@@ -1,0 +1,6 @@
+Name: Gist
+Description: Search within your GitHub Gists
+Binding: gist_addin
+Interactive: true
+
+
