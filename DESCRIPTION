@@ -18,4 +18,6 @@ Imports:
     keyring,
     miniUI,
     rstudioapi,
-    shiny
+    shiny,
+    shinyjs,
+    usethis

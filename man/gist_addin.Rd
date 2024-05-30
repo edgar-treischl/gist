@@ -2,15 +2,13 @@
 % Please edit documentation in R/addin.R
 \name{gist_addin}
 \alias{gist_addin}
-\title{Manage code snippets via the copycat addin}
+\title{Manage GitHub Gists via the gist addin}
 \usage{
 gist_addin()
 }
 \description{
-The \code{copycat_addin()} creates a shiny gadget
-to work with the Copycat or your data for Copycat. Pick an R package
-and a function within the gadget. Press the insert
+The \code{gist_addin()} creates a shiny gadget
+to manage your gists. Pick a gists, press the insert
 button and the code will be insert into the current document at the
-location of the cursor. The \code{copycat_addin()} is inspired by parsnip addin,
-which inserts model specifications.
+location of the cursor. Furthermore you can create and delete gists.
 }

@@ -1,16 +1,13 @@
-#' Manage code snippets via the copycat addin
+#' Manage GitHub Gists via the gist addin
 #'
-#' @description The `copycat_addin()` creates a shiny gadget
-#' to work with the Copycat or your data for Copycat. Pick an R package
-#' and a function within the gadget. Press the insert
+#' @description The `gist_addin()` creates a shiny gadget
+#' to manage your gists. Pick a gists, press the insert
 #' button and the code will be insert into the current document at the
-#' location of the cursor. The `copycat_addin()` is inspired by parsnip addin,
-#' which inserts model specifications.
+#' location of the cursor. Furthermore you can create and delete gists.
 #'
 #' @import shiny
 #' @export
 #'
-
 
 gist_addin <- function() {
 
@@ -47,7 +44,9 @@ gist_addin <- function() {
         background-color: #f4511e;
       }"))
     ),
-    miniUI::gadgetTitleBar("Shiny gadget example"),
+    shinyjs::useShinyjs(),
+    shinyjs::extendShinyjs(text = "shinyjs.refresh_page = function() { location.reload(); }", functions = "refresh_page"),
+    miniUI::gadgetTitleBar("Gist App"),
     miniUI::miniTabstripPanel(
       miniUI::miniTabPanel("Get", icon = icon("sliders"),
                            miniUI::miniContentPanel(
@@ -74,16 +73,19 @@ gist_addin <- function() {
                              textInput("description", "Description", ""),
                              textInput("code", "Code", ""),
                              miniUI::miniButtonBlock(
-                               actionButton("push", "Push gist", class = "btn-success")
+                               actionButton("push", "Push gist", class = "btn-success"),
+                               actionButton("restart", "Restart", class = "btn-edgar")
                              )
                            )
       ),
       miniUI::miniTabPanel("Delete", icon = icon("upload"),
                            miniUI::miniContentPanel(
-                             verbatimTextOutput("preview2")
+                             tableOutput('table'),
+                             textInput("id", "Insert Gist ID to DELETE the file:", "")
                            ),
                            miniUI::miniButtonBlock(
-                             actionButton("resetMap", "Reset")
+                             actionButton("push2", "Delete gist", class = "btn-error"),
+                             actionButton("restart2", "Restart", class = "btn-edgar")
                            )
       )
     )
@@ -144,9 +146,7 @@ gist_addin <- function() {
       create_code()
     })
 
-    output$preview2 <- renderText({
-      print("Hello")
-    })
+    output$table <- renderTable(gistfiles())
 
     #write code
     observeEvent(input$write, {
@@ -162,11 +162,41 @@ gist_addin <- function() {
 
     observeEvent(input$push, {
       req(input$caption, input$description, input$code)
-      copycat::copycat_gists.create(name = input$caption,
-                                    code = input$code,
-                                    description = input$description)
+      x <- create_gist(name = input$caption,
+                       code = input$code,
+                       description = input$description)
+
+      if (x == "TRUE") {
+        shiny::showNotification("Pushed to GitHub",
+                                duration = 3,
+                                closeButton = TRUE,
+                                type = "message")
+      }
 
     })
+
+    observeEvent(input$push2, {
+      req(input$id)
+
+      x <- delete_gist(id = input$id)
+
+      if (x == "TRUE") {
+        shiny::showNotification("Deleted",
+                                duration = 3,
+                                closeButton = TRUE,
+                                type = "message")
+      }
+
+    })
+
+    observeEvent(input$restart, {
+      shinyjs::js$refresh_page()
+    })
+
+    observeEvent(input$restart2, {
+      shinyjs::js$refresh_page()
+    })
+
 
     observeEvent(input$done, {
       stopApp(TRUE)
@@ -177,7 +207,6 @@ gist_addin <- function() {
   runGadget(shinyApp(ui, server), viewer = paneViewer())
 
 }
-
 
 
 
