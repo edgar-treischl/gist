@@ -47,31 +47,51 @@ gist_addin <- function() {
         background-color: #f4511e;
       }"))
     ),
-    miniUI::gadgetTitleBar("Gist"),
-    miniUI::miniContentPanel(
-      h4("Pick a Gist:"),
-      fillRow(
-        fillCol(
-          uiOutput("package_names")
-        ),
-        miniUI::miniContentPanel(
-          h4(uiOutput("tooltip")),
-          br(),
-          verbatimTextOutput("preview"),
-        )
+    miniUI::gadgetTitleBar("Shiny gadget example"),
+    miniUI::miniTabstripPanel(
+      miniUI::miniTabPanel("Get", icon = icon("sliders"),
+                           miniUI::miniContentPanel(
+                             h4("Pick a Gist:"),
+                             fillRow(
+                               fillCol(
+                                 uiOutput("package_names")
+                               ),
+                               miniUI::miniContentPanel(
+                                 h4(uiOutput("tooltip")),
+                                 br(),
+                                 verbatimTextOutput("preview"),
+                               )
+                             )
+                           ),
+                           miniUI::miniButtonBlock(
+                             actionButton("write", "Insert code", class = "btn-success"),
+                             actionButton("copy", "Copy code", class = "btn-edgar")
+                           )
+      ),
+      miniUI::miniTabPanel("Create", icon = icon("area-chart"),
+                           miniUI::miniContentPanel(
+                             textInput("caption", "Name", ""),
+                             textInput("description", "Description", ""),
+                             textInput("code", "Code", ""),
+                             miniUI::miniButtonBlock(
+                               actionButton("push", "Push gist", class = "btn-success")
+                             )
+                           )
+      ),
+      miniUI::miniTabPanel("Delete", icon = icon("upload"),
+                           miniUI::miniContentPanel(
+                             verbatimTextOutput("preview2")
+                           ),
+                           miniUI::miniButtonBlock(
+                             actionButton("resetMap", "Reset")
+                           )
       )
-    ),
-    miniUI::miniButtonBlock(
-      actionButton("write", "Insert code", class = "btn-success"),
-      actionButton("copy", "Copy code", class = "btn-edgar")
     )
   )
 
   server <- function(input, output, session) {
 
 
-
-    #create list with functions
     get_gistnames <- reactive({
 
       x <- gistfiles()
@@ -80,7 +100,6 @@ gist_addin <- function() {
       file <- x$file
 
     })
-
 
     #create des functions
     get_des <- reactive({
@@ -125,6 +144,10 @@ gist_addin <- function() {
       create_code()
     })
 
+    output$preview2 <- renderText({
+      print("Hello")
+    })
+
     #write code
     observeEvent(input$write, {
       txt <- create_code()
@@ -137,18 +160,23 @@ gist_addin <- function() {
       clipr::write_clip(txt)
     })
 
-    #DONE
-    observeEvent(input$done, {
-      stopApp()
+    observeEvent(input$push, {
+      req(input$caption, input$description, input$code)
+      copycat::copycat_gists.create(name = input$caption,
+                                    code = input$code,
+                                    description = input$description)
+
     })
 
+    observeEvent(input$done, {
+      stopApp(TRUE)
+    })
   }
 
   viewer <- paneViewer(300)
-  runGadget(ui, server, viewer = viewer)
+  runGadget(shinyApp(ui, server), viewer = paneViewer())
 
 }
-
 
 
 
@@ -156,6 +184,7 @@ gist_addin <- function() {
 utils::globalVariables(c("package"))
 
 #OLD ONE####################
+
 # gist_addin <- function() {
 #
 #   ui <- miniUI::miniPage(
@@ -191,7 +220,7 @@ utils::globalVariables(c("package"))
 #         background-color: #f4511e;
 #       }"))
 #     ),
-#     miniUI::gadgetTitleBar("GistR"),
+#     miniUI::gadgetTitleBar("Gist"),
 #     miniUI::miniContentPanel(
 #       h4("Pick a Gist:"),
 #       fillRow(
@@ -216,7 +245,7 @@ utils::globalVariables(c("package"))
 #
 #
 #     #create list with functions
-#     get_packages <- reactive({
+#     get_gistnames <- reactive({
 #
 #       x <- gistfiles()
 #
@@ -235,24 +264,11 @@ utils::globalVariables(c("package"))
 #       print(x)
 #
 #     })
-#     #make checkbox for package choices
 #
-#     # output$package_choices <- renderUI({
-#     #
-#     #   choices <- get_fun()
-#     #
-#     #   radioButtons(
-#     #     inputId = "fun_name",
-#     #     label = NULL,
-#     #     choices = choices
-#     #   )
-#     #
-#     # })
-#
-#     #make checkboxes for listed packages
+#     #make checkboxes for listed gists
 #     output$package_names <- renderUI({
 #
-#       included_packages <- get_packages()
+#       included_packages <- get_gistnames()
 #
 #       radioButtons(
 #         inputId = "package_names",
@@ -262,7 +278,7 @@ utils::globalVariables(c("package"))
 #
 #     })
 #
-#     #print a tooltip/description of a function
+#     #print a tooltip/description of a gits
 #     output$tooltip <- renderUI({
 #       get_des()
 #
@@ -305,6 +321,8 @@ utils::globalVariables(c("package"))
 #   runGadget(ui, server, viewer = viewer)
 #
 # }
+
+
 
 
 
