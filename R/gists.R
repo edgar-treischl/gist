@@ -47,7 +47,7 @@ gistfiles <- function(arrange = TRUE) {
     dplyr::rename("file" = answer, "id" = ids)
 
   if (arrange == TRUE) {
-    df <- dplyr::arrange(file)
+    df <- df |> dplyr::arrange(file)
   }
 
   return(df)

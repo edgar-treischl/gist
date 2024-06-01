@@ -17,9 +17,10 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 
+[![R-CMD-check](https://github.com/edgar-treischl/gist/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/edgar-treischl/gist/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The gist package provides a set of functions to work with the GitHub Gist. It allows you to create, read, update and delete gists via the GitHub API. Moreover, it provides R Studio adding - a shiny app - to interact with gists.
+The gist package provides a set of functions to work with [GitHub Gist](https://gist.github.com/). It allows you to copy, create, and delete gists via the GitHub API. Moreover, it provides an RStudio addin - a shiny app - to interact with your gists.
 
 ## Installation
 
@@ -29,7 +30,7 @@ You can install the development version of gist like so:
 devtools::install_github("edgar-treischl/gist")
 ```
 
-In order to retrieve data, you need to provide a GitHub API token (`github_api`) with the `keyring` package. Use the `key_set()` function code to save the token:
+In order to retrieve data, you need to provide a GitHub API token (`github_api`) with the `keyring` package. Use the `key_set()` function to store the token:
 
 ```{r, eval=FALSE}
 #Save GitHub API token as github_api
@@ -38,7 +39,7 @@ keyring::key_set(service = "github_api")
 
 ## Example
 
-Go to the addin menu or use the following code to open the gist app:
+Go to the addin menu or use the following code to open the gist app. The app shows a list with your gist files and a preview of the code. Pick your gist and copy or insert the code. Furthermore, the app has tabs to create and delete gists as well.
 
 ```{r, eval=FALSE}
 #Run gist_addin()
@@ -47,17 +48,19 @@ gist::gist_addin()
 
 ![](man/figures/gistapp.png){width="70%"}
 
-If you want to interact via CLI, you can use the following functions:
-
+If you want to interact via R, you can use the following functions:
 
 ```{r}
 #gistfiles lists all files and returns names and ids
-gist::gistfiles()
+gist::gistfiles() |> 
+  head()
 ```
 
-To work with your files, the package includes get, create, and delete functions. The following code shows how to get a gist:
+The package includes a get, create, and delete function. The following code shows how to get a gist:
 
-```{r}
+```{r, eval=FALSE}
 #gistfiles lists all files and returns names and ids
-gist::get_gist("DBI_connect.R")
+gist::get_gist(filename = "DBI_connect.R")
+
+#> ✔ Copied DBI_connect.R from your GitHub account.
 ```
