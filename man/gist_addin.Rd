@@ -2,13 +2,13 @@
 % Please edit documentation in R/addin.R
 \name{gist_addin}
 \alias{gist_addin}
-\title{Manage GitHub Gists via the gist addin}
+\title{The gist addin}
 \usage{
 gist_addin()
 }
 \description{
-The \code{gist_addin()} creates a shiny miniui app
+The \code{gist_addin()} creates a shiny app
 to manage your gists. Pick a gist, press the copy or the insert
-button and the code will be insert into the current document
+button and the code will be insert.
 Furthermore you can create and delete gists as well.
 }

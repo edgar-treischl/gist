@@ -2,16 +2,16 @@
 % Please edit documentation in R/gists.R
 \name{delete_gist}
 \alias{delete_gist}
-\title{Delete Github Gist files}
+\title{Delete Gist files}
 \usage{
 delete_gist(id)
 }
 \arguments{
-\item{id}{The id of the Gist file.}
+\item{id}{The id of the Gist file (from gistfiles).}
 }
 \value{
 Message if file was successfully deleted.
 }
 \description{
-Be careful: The function \code{delete_gist()} deletes GitHub Gists file.
+Be careful: The function \code{delete_gist()} deletes a Gist file.
 }

@@ -23,3 +23,4 @@ Imports:
     shinyjs,
     usethis
 URL: https://edgar-treischl.github.io/gist/index.html
+BugReports: https://github.com/edgar-treischl/gist/issues

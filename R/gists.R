@@ -1,11 +1,12 @@
-#' Explore all GitHub Gist files
+#' List all Gist files
 #'
-#' @description The function `gistfiles()` returns all GitHub Gists.
-#' @return Data frame with file names.
+#' @description The function `gistfiles()` returns all Gists file.
+#' @param arrange If the files should be arranged alphabetically.
+#' @return Data frame with file names and id.
 #' @export
 #'
 
-gistfiles <- function() {
+gistfiles <- function(arrange = TRUE) {
   key <- try(keyring::key_get(service = "github_api"), silent = TRUE)
   test <- exists("key")
 
@@ -42,24 +43,32 @@ gistfiles <- function() {
     ids <- append(ids, id)
   }
 
-  df <- data.frame(answer, ids) |> dplyr::rename("file" = answer,
-                                                 "id" = ids)
+  df <- data.frame(answer, ids) |>
+    dplyr::rename("file" = answer, "id" = ids)
+
+  if (arrange == TRUE) {
+    df <- dplyr::arrange(file)
+  }
+
   return(df)
 
 }
 
 
 
-#' Copy Github Gist files
+#' Get Gist file
 #'
-#' @description The function `get_gist()` copies GitHub Gists.
-#' @param filename The file name from a gist of your GitHub account (see gistfiles)
+#' @description The function `get_gist()` copies a Gist file.
+#' @param filename The file name of a gist file.
+#' @param raw Get raw text string or copy
 #' @param description If TRUE, the function returns the description of the Gist.
 #' @return Message if successful.
 #' @export
 #'
 
-get_gist <- function(filename, description = FALSE) {
+get_gist <- function(filename,
+                     description = FALSE,
+                     raw = FALSE) {
 
   key <- try(keyring::key_get(service = "github_api"), silent = TRUE)
   test <- exists("key")
@@ -83,7 +92,7 @@ get_gist <- function(filename, description = FALSE) {
 
   resp_json <- resp |> httr2::resp_body_json()
 
-  x <- gistfiles()
+  x <- gistfiles(arrange = FALSE)
   x$n <- 1:length(x$file)
 
   filename <- paste0(filename)
@@ -97,7 +106,7 @@ get_gist <- function(filename, description = FALSE) {
   }
 
   files_json <- resp_json[[scrapednr]]$files
-  gist_url <-files_json[[1]][[4]]
+  gist_url <- files_json[[1]][[4]]
 
   #gist_url <- raw_link(n = scrapednr)
 
@@ -110,21 +119,26 @@ get_gist <- function(filename, description = FALSE) {
     return(des)
   }
 
-  return(txt)
-  #clipr::write_clip(txt)
-  #cli::cli_alert_success("Copied {filename} from your GitHub account.")
+  #return(txt)
+  cli::cli_alert_success("Copied {filename} from your GitHub account.")
+
+  if (raw == TRUE) {
+    return(txt)
+  } else {
+    clipr::write_clip(txt)
+  }
 
 }
 
 utils::globalVariables(c("n"))
 
 
-#' Create Github Gist files
+#' Create Gist file
 #'
-#' @description The function `create_gist()` creates a new GitHub Gist file.
+#' @description The function `create_gist()` creates a new Gist file.
 #' @param name The name of the file.
-#' @param code String with the code of the Gist.
-#' @param description String with the code description.
+#' @param code The code as character.
+#' @param description The description of the code as character.
 #' @return Message if successful.
 #' @export
 #'
@@ -163,7 +177,7 @@ create_gist = function (name, code, description) {
 
   resp <- httr2::req_perform(req)
 
-  x <- gistfiles()
+  x <- gistfiles(arrange = FALSE)
 
   if (name %in% x$file) {
     usethis::ui_done("Insert {name}")
@@ -174,10 +188,10 @@ create_gist = function (name, code, description) {
 }
 
 
-#' Delete Github Gist files
+#' Delete Gist files
 #'
-#' @description Be careful: The function `delete_gist()` deletes GitHub Gists file.
-#' @param id The id of the Gist file.
+#' @description Be careful: The function `delete_gist()` deletes a Gist file.
+#' @param id The id of the Gist file (from gistfiles).
 #' @return Message if file was successfully deleted.
 #' @export
 #'

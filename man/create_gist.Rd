@@ -2,20 +2,20 @@
 % Please edit documentation in R/gists.R
 \name{create_gist}
 \alias{create_gist}
-\title{Create Github Gist files}
+\title{Create Gist file}
 \usage{
 create_gist(name, code, description)
 }
 \arguments{
 \item{name}{The name of the file.}
 
-\item{code}{String with the code of the Gist.}
+\item{code}{The code as character.}
 
-\item{description}{String with the code description.}
+\item{description}{The description of the code as character.}
 }
 \value{
 Message if successful.
 }
 \description{
-The function \code{create_gist()} creates a new GitHub Gist file.
+The function \code{create_gist()} creates a new Gist file.
 }

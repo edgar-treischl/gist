@@ -1,8 +1,8 @@
-#' Manage GitHub Gists via the gist addin
+#' The gist addin
 #'
-#' @description The `gist_addin()` creates a shiny miniui app
+#' @description The `gist_addin()` creates a shiny app
 #' to manage your gists. Pick a gist, press the copy or the insert
-#' button and the code will be insert into the current document
+#' button and the code will be insert.
 #' Furthermore you can create and delete gists as well.
 #'
 #' @import shiny
@@ -96,7 +96,7 @@ gist_addin <- function() {
 
     get_gistnames <- reactive({
 
-      x <- gistfiles()
+      x <- gistfiles(arrange = FALSE)
 
       x <- x |> dplyr::select(file) |> dplyr::arrange(file)
       file <- x$file
@@ -108,7 +108,9 @@ gist_addin <- function() {
       req(input$package_names)
 
       #print("Sorry, no description available.")
-      x <- get_gist(input$package_names, description = TRUE)
+      x <- get_gist(input$package_names,
+                    description = TRUE,
+                    raw = TRUE)
       print(x)
 
     })
@@ -146,7 +148,7 @@ gist_addin <- function() {
       create_code()
     })
 
-    output$table <- renderTable(gistfiles())
+    output$table <- renderTable(gistfiles(arrange = FALSE))
 
     #write code
     observeEvent(input$write, {

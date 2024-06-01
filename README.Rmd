@@ -16,9 +16,10 @@ knitr::opts_chunk$set(
 # gist
 
 <!-- badges: start -->
+
 <!-- badges: end -->
 
-The gist package provides a set of functions to work with the GitHub Gist API. It allows you to create, read, update and delete gists. Moreover, it provides a shiny app to interact with gists. The app will be installed as an addin and can be accessed via the RStudio addin menu.
+The gist package provides a set of functions to work with the GitHub Gist. It allows you to create, read, update and delete gists via the GitHub API. Moreover, it provides R Studio adding - a shiny app - to interact with gists.
 
 ## Installation
 
@@ -35,7 +36,6 @@ In order to retrieve data, you need to provide a GitHub API token (`github_api`)
 keyring::key_set(service = "github_api")
 ```
 
-
 ## Example
 
 Go to the addin menu or use the following code to open the gist app:
@@ -45,3 +45,19 @@ Go to the addin menu or use the following code to open the gist app:
 gist::gist_addin()
 ```
 
+![](man/figures/gistapp.png){width="70%"}
+
+If you want to interact via CLI, you can use the following functions:
+
+
+```{r}
+#gistfiles lists all files and returns names and ids
+gist::gistfiles()
+```
+
+To work with your files, the package includes get, create, and delete functions. The following code shows how to get a gist:
+
+```{r}
+#gistfiles lists all files and returns names and ids
+gist::get_gist("DBI_connect.R")
+```
