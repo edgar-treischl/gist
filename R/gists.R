@@ -120,11 +120,10 @@ get_gist <- function(filename,
   }
 
   #return(txt)
-  cli::cli_alert_success("Copied {filename} from your GitHub account.")
-
   if (raw == TRUE) {
     return(txt)
   } else {
+    cli::cli_alert_success("Copied {filename} from your GitHub account.")
     clipr::write_clip(txt)
   }
 

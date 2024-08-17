@@ -123,6 +123,7 @@ gist_addin <- function() {
       radioButtons(
         inputId = "package_names",
         label = NULL,
+        selected = character(0),
         choices = included_packages
       )
 
@@ -139,7 +140,7 @@ gist_addin <- function() {
 
       #paste0(txt0,"\n", txt, sep = "\n\n")
       req(input$package_names)
-      get_gist(input$package_names, description = FALSE)
+      get_gist(input$package_names, description = FALSE, raw = TRUE)
 
     })
 
