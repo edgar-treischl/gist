@@ -1,6 +1,6 @@
-#' The gist addin
+#' The Gist Addin
 #'
-#' @description The `gist_addin()` creates a shiny app
+#' @description The `gistAddin()` creates a shiny app
 #' to manage your gists. Pick a gist, press the copy or the insert
 #' button and the code will be insert.
 #' Furthermore you can create and delete gists as well.
@@ -9,7 +9,7 @@
 #' @export
 #'
 
-gist_addin <- function() {
+gistAddin <- function() {
 
   ui <- miniUI::miniPage(
     tags$head(
@@ -94,9 +94,9 @@ gist_addin <- function() {
   server <- function(input, output, session) {
 
 
-    get_gistnames <- reactive({
+    gist_getnames <- reactive({
 
-      x <- gistfiles(arrange = FALSE)
+      x <- gistFiles(arrange = FALSE)
 
       x <- x |> dplyr::select(file) |> dplyr::arrange(file)
       file <- x$file
@@ -108,7 +108,7 @@ gist_addin <- function() {
       req(input$package_names)
 
       #print("Sorry, no description available.")
-      x <- get_gist(input$package_names,
+      x <- gist_get(input$package_names,
                     description = TRUE,
                     raw = TRUE)
       print(x)
@@ -118,7 +118,7 @@ gist_addin <- function() {
     #make checkboxes for listed gists
     output$package_names <- renderUI({
 
-      included_packages <- get_gistnames()
+      included_packages <- gist_getnames()
 
       radioButtons(
         inputId = "package_names",
@@ -140,7 +140,7 @@ gist_addin <- function() {
 
       #paste0(txt0,"\n", txt, sep = "\n\n")
       req(input$package_names)
-      get_gist(input$package_names, description = FALSE, raw = TRUE)
+      gist_get(input$package_names, description = FALSE, raw = TRUE)
 
     })
 
@@ -149,7 +149,7 @@ gist_addin <- function() {
       create_code()
     })
 
-    output$table <- renderTable(gistfiles(arrange = FALSE))
+    output$table <- renderTable(gistFiles(arrange = FALSE))
 
     #write code
     observeEvent(input$write, {
@@ -165,7 +165,7 @@ gist_addin <- function() {
 
     observeEvent(input$push, {
       req(input$caption, input$description, input$code)
-      x <- create_gist(name = input$caption,
+      x <- gist_create(name = input$caption,
                        code = input$code,
                        description = input$description)
 
@@ -181,7 +181,7 @@ gist_addin <- function() {
     observeEvent(input$push2, {
       req(input$id)
 
-      x <- delete_gist(id = input$id)
+      x <- gist_delete(id = input$id)
 
       if (x == "TRUE") {
         shiny::showNotification("Deleted",
@@ -277,9 +277,9 @@ utils::globalVariables(c("package"))
 #
 #
 #     #create list with functions
-#     get_gistnames <- reactive({
+#     gist_getnames <- reactive({
 #
-#       x <- gistfiles()
+#       x <- gistFiles()
 #
 #       x <- x |> dplyr::select(file) |> dplyr::arrange(file)
 #       file <- x$file
@@ -292,7 +292,7 @@ utils::globalVariables(c("package"))
 #       req(input$package_names)
 #
 #       #print("Sorry, no description available.")
-#       x <- get_gist(input$package_names, description = TRUE)
+#       x <- gist_get(input$package_names, description = TRUE)
 #       print(x)
 #
 #     })
@@ -300,7 +300,7 @@ utils::globalVariables(c("package"))
 #     #make checkboxes for listed gists
 #     output$package_names <- renderUI({
 #
-#       included_packages <- get_gistnames()
+#       included_packages <- gist_getnames()
 #
 #       radioButtons(
 #         inputId = "package_names",
@@ -321,7 +321,7 @@ utils::globalVariables(c("package"))
 #
 #       #paste0(txt0,"\n", txt, sep = "\n\n")
 #       req(input$package_names)
-#       get_gist(input$package_names, description = FALSE)
+#       gist_get(input$package_names, description = FALSE)
 #
 #     })
 #

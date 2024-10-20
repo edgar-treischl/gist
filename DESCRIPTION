@@ -1,15 +1,15 @@
 Package: gist
 Title: Manage GitHub Gist
-Version: 0.0.0.9000
+Version: 0.0.1.0
 Authors@R: person("Edgar", "Treischl", 
                 email = "gist@edgar-treischl.de",
                 comment = c(ORCID = "0000-0001-5627-9125"),
                 role = c("aut", "cre"))
-Description: Manage GitHub Gist via R Studio.
+Description: Manage GitHub Gist via R.
 License: CC0
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 Imports: 
     cli,
     clipr,
