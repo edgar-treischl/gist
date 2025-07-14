@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# gist
+# gist: Hello GitLab
 
 <!-- badges: start -->
 

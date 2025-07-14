@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# gist
+# gist: Hello GitLab
 
 <!-- badges: start -->
 
@@ -76,13 +76,13 @@ your gists to get to know the id of a gist.
 #gistFiles lists all files and returns names and ids
 mygists <- gist::gistFiles()
 mygists |> head()
-#>                  file                               id
-#> 1            A_Test.R 92fa4eeda00996058731e056c31e4535
-#> 2        attachment.R 0daa7241e752a4c4f77ad0085b9d7694
-#> 3             clear.R 27a596e3c9cf3b533936e771a01d840f
-#> 4 cli_progress_step.R c0a0c0485afd7b0b48101e86a5dd1b3c
-#> 5    dbi::dbConnect.R 330939119e04086d3a68a3c7662ad5a0
-#> 6        dotwhisker.R 725f9b302453c9456e6dcc546760a0d4
+#>                      file                               id
+#> 1                A_Test.R 2593ecbfe37972c78ed40c238de99fcb
+#> 2          Create_XML.sql 0a7ec749730c674e4bbaecc2b03ddcf1
+#> 3            attachment.R 0daa7241e752a4c4f77ad0085b9d7694
+#> 4              blastula.R c207c4d4f35be94bf20f6c1882d622db
+#> 5 blastula_render_email.R d83b171315dba56157514f75b5bc857b
+#> 6                 clear.R 27a596e3c9cf3b533936e771a01d840f
 ```
 
 To delete a gist, give the id the `gist_delete()` function.
@@ -90,6 +90,6 @@ To delete a gist, give the id the `gist_delete()` function.
 ``` r
 #Delete a gist
 gist::gist_delete(id = mygists$id[1])
-#> ✔ Deleted id: 92fa4eeda00996058731e056c31e4535
+#> ✔ Deleted id: 2593ecbfe37972c78ed40c238de99fcb
 #> [1] "TRUE"
 ```
