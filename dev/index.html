@@ -52,7 +52,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header">
-<img src="logo.png" class="logo" alt=""><h1 id="gist">gist<a class="anchor" aria-label="anchor" href="#gist"></a>
+<img src="logo.png" class="logo" alt=""><h1 id="gist-pipeline-ausprobieren">gist Pipeline ausprobieren<a class="anchor" aria-label="anchor" href="#gist-pipeline-ausprobieren"></a>
 </h1>
 </div>
 <!-- badges: start -->
@@ -96,10 +96,10 @@
 <p>Set the <code>raw</code> parameter to <code>TRUE</code> in case you need the raw character vector. Finally, let us delete a gist. Therefore, you need to inspect your gists to get to know the id of a gist.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#gistFiles lists all files and returns names and ids</span></span>
-<span><span class="va">mygists</span> <span class="op">&lt;-</span> <span class="fu">gist</span><span class="fu">::</span><span class="fu"><a href="reference/gistfiles.html">gistFiles</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">mygists</span> <span class="op">&lt;-</span> <span class="fu">gist</span><span class="fu">::</span><span class="fu"><a href="reference/gistFiles.html">gistFiles</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">mygists</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                      file                               id</span></span>
-<span><span class="co">#&gt; 1                A_Test.R 1f39a713250bd31fcf4df32ce83720fd</span></span>
+<span><span class="co">#&gt; 1                A_Test.R 609e9e9b328e27d42b59f4a8990af61d</span></span>
 <span><span class="co">#&gt; 2          Create_XML.sql 0a7ec749730c674e4bbaecc2b03ddcf1</span></span>
 <span><span class="co">#&gt; 3            attachment.R 0daa7241e752a4c4f77ad0085b9d7694</span></span>
 <span><span class="co">#&gt; 4              blastula.R c207c4d4f35be94bf20f6c1882d622db</span></span>
@@ -109,7 +109,7 @@
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Delete a gist</span></span>
 <span><span class="fu">gist</span><span class="fu">::</span><span class="fu"><a href="reference/gist_delete.html">gist_delete</a></span><span class="op">(</span>id <span class="op">=</span> <span class="va">mygists</span><span class="op">$</span><span class="va">id</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ✔ Deleted id: 1f39a713250bd31fcf4df32ce83720fd</span></span>
+<span><span class="co">#&gt; ✔ Deleted id: 609e9e9b328e27d42b59f4a8990af61d</span></span>
 <span><span class="co">#&gt; [1] "TRUE"</span></span></code></pre></div>
 </div>
 </div>
